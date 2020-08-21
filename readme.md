@@ -5,7 +5,7 @@
 
 ## use
 `y <URL>`
-(edit paths on top of the file to follow your personal preferences)
+(edit paths on top of the file to set your personal preferences)
 
 
 ## requires
@@ -28,10 +28,14 @@ file-names are just twitter-username and tweet-number
 ### youtube
 allows to set several predetermined filesystem-paths to keep file-categories separately:
 
-- `y m <URL>` – music (automatically choses it for `music.youtube.com`)
+- `y m <URL>` – music (automatically chosen for `music.youtube.com`)
 - `y c <URL>` – comedy-tracks
 - `y a <URL>` – audiobooks
 
 ### soundcloud
 1. occasional wav-files are converted to mp3 320kb/s
 2. artist is set based on url (instead of having none by default)
+
+
+## license
+[MIT](./LICENSE)

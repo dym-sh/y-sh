@@ -1,18 +1,21 @@
 #!/bin/bash
 
-## ~/scripts/y
+## y-sh
 # > algorithmically-enhanced youtube-dl wrapper for audio-downloads
 
 ## requires
-# - `cargo install sd`
-# - `pip install youtube_dl`
-# - `sudo apt install -y lynx`
+# - `pip install youtube_dl` – the main thing, you should already have it
+# - `sudo apt install -y ffmpeg` – to convert files of diffrent formats
+# - `cargo install sd` – better `sed`
+# - `sudo apt install -y lynx` – to easily scrap web-pages
 
 
 DEFAULT_PATH='/Data/_'
 MUSIC_PATH='/Data/Music'
 AUDIOBOOKS_PATH='/Data/Audiobooks/yt'
 COMEDY_PATH='/Data/Audiobooks/comedy'
+
+IFS=$'\n'
 
 OPT="$1"
 URL="$2"
@@ -39,9 +42,9 @@ to_mp3()
 {
   for NON_MP3 in "$@"
   do
-    OUT=` echo "$NON_MP3 [conv].mp3" \
-       |  sd '\.\w+ \[conv\]\.mp3$' ' [conv].mp3' \
-       `
+    OUT=` echo "$NON_MP3" \
+        |  sd '(\.\w+)?$' ' [conv].mp3' \
+        `
     echo "'$NON_MP3'"
     echo ">> '$OUT'"
 
@@ -70,7 +73,6 @@ get_bandcamp_album()
             | grep -Eiw "^(https://$SITE/track)" \
             | sd '\?action=download' '' \
             | uniq \
-            | tr '\\n' ' ' \
             `)
   for LINK in "${SUBLINKS[@]}" ; do
     get_bandcamp_track "$LINK"
@@ -126,9 +128,9 @@ youtube.com|youtu.be)
 
   ls -A "$MUSIC_PATH/$ARTIST/**/*.wav"
   [ $? -eq 0 ] \
-  && to_mp3 "$MUSIC_PATH/$ARTIST/**/*.wav"
+    && to_mp3 "$MUSIC_PATH/$ARTIST/**/*.wav"
   [ $? -eq 0 ] \
-  && rm "$MUSIC_PATH/$ARTIST/**/*.wav"
+    && rm "$MUSIC_PATH/$ARTIST/**/*.wav"
   ;;
 
 *.bandcamp.com)
@@ -151,7 +153,6 @@ youtube.com|youtu.be)
               | grep -Eiw "^(https://$SITE/(album|track))" \
               | sd '\?action=download' '' \
               | uniq \
-              | tr '\\n' ' ' \
               `)
     for LINK in "${SUBLINKS[@]}" ; do
       if [[ "$LINK" =~ '/track/' ]]; then
@@ -161,6 +162,23 @@ youtube.com|youtu.be)
       fi
     done
   fi
+
+  RENAME_LIST=(` ls -RA $MUSIC_PATH/$ARTIST/NA/* `)
+  if [ $? -eq 0 ]; then
+    echo "files in the album /NA/: '${RENAME_LIST[@]}'"
+    for RENAME_FROM in "${RENAME_LIST[@]}"; do
+      RENAME_TO=` echo "$RENAME_FROM" \
+                | sd '/NA/NA ' '/' \
+                `
+    if [[ "$RENAME_FROM" != "$RENAME_TO" ]]; then
+      echo "'$RENAME_FROM'"
+      echo ">> '$RENAME_TO'"
+      mv "$RENAME_FROM" "$RENAME_TO"
+    fi
+    done
+    rmdir "$MUSIC_PATH/$ARTIST/NA/"
+  fi
+
   ;;
 
 'twitter.com')

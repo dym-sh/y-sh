@@ -6,9 +6,9 @@
 ## use
 `y <URL>`
 
-> y
+> `y https://orax.bandcamp.com/track/ectoplasmic`
 
-(edit paths on top of the file to set your personal preferences)
+(edit to set your prefered save-files paths)
 
 
 ## requires

@@ -43,7 +43,7 @@ allows to set several predetermined filesystem-paths to keep file-categories sep
 ## mirrors
 - [github](https://gituhb.com/dym-sh/y-sh/)
 - [src.dym.sh](https://src.dym.sh/y-sh/)
-- [hyper](hyper://4329bfffa5700e21bb0c89db374590c4b39d57b21a19aa1dc8677882e59c3cf4/lab/y-sh/) [[?](https://beakerbrowser.com)]
+- `hyper://3703079b5cbf386f5ef86eef4b9718d2fc31b5383ee258dc970276ee912f3664/` [[?](https://beakerbrowser.com)]
 
 ## license
 [MIT](./LICENSE)

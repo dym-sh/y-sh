@@ -31,7 +31,7 @@ SITE=` echo "$URL" \
 echo "URL : '$URL'"
 echo "SITE : '$SITE'"
 
-if [[ "$OPT" == 'F' ]]; then
+if [ "$OPT" == 'F' ]; then
   youtube-dl "$URL" -F
   exit 0
 fi
@@ -72,7 +72,7 @@ get_bandcamp_album()
   SUBLINKS=(` lynx -dump -listonly -nonumbers "$1" \
             | grep -Eiw "^(https://$SITE/track)" \
             | sd '(\?|#).+$' '' \
-            | uniq \
+            | sort -u \
             `)
   for LINK in "${SUBLINKS[@]}" ; do
     get_bandcamp_track "$LINK"
@@ -169,7 +169,7 @@ youtube.com|youtu.be)
       RENAME_TO=` echo "$RENAME_FROM" \
                 | sd '/NA/NA ' '/' \
                 `
-    if [[ "$RENAME_FROM" != "$RENAME_TO" ]]; then
+    if [ "$RENAME_FROM" != "$RENAME_TO" ]; then
       echo "'$RENAME_FROM'"
       echo ">> '$RENAME_TO'"
       mv "$RENAME_FROM" "$RENAME_TO"

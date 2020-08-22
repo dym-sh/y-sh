@@ -40,9 +40,10 @@ allows to set several predetermined filesystem-paths to keep file-categories sep
 2. artist is set based on url (instead of having none by default)
 
 
-## mirror
+## mirrors
+- [github](https://gituhb.com/dym-sh/y-sh/)
 - [src.dym.sh](https://src.dym.sh/y-sh/)
-
+- [hyper](hyper://4329bfffa5700e21bb0c89db374590c4b39d57b21a19aa1dc8677882e59c3cf4/lab/y-sh/) [[?](https://beakerbrowser.com)]
 
 ## license
 [MIT](./LICENSE)

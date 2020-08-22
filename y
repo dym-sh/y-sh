@@ -62,8 +62,8 @@ get_bandcamp_track()
   youtube-dl "$1" --force-ipv4 -f mp3-320 \
     -o "$MUSIC_PATH/$ARTIST/%(album)s/%(track_number)02d %(title)s.%(ext)s"
   [ $? -eq 1 ] \
-  && youtube-dl "$1" --force-ipv4 -f mp3 \
-     -o "$MUSIC_PATH/$ARTIST/%(album)s/%(track_number)02d %(title)s.%(ext)s"
+    && youtube-dl "$1" --force-ipv4 -f mp3 \
+       -o "$MUSIC_PATH/$ARTIST/%(album)s/%(track_number)02d %(title)s.%(ext)s"
 }
 
 get_bandcamp_album()
@@ -71,7 +71,7 @@ get_bandcamp_album()
   echo "> > album: '$1'"
   SUBLINKS=(` lynx -dump -listonly -nonumbers "$1" \
             | grep -Eiw "^(https://$SITE/track)" \
-            | sd '\?action=download' '' \
+            | sd '(\?|#).+$' '' \
             | uniq \
             `)
   for LINK in "${SUBLINKS[@]}" ; do
@@ -126,11 +126,11 @@ youtube.com|youtu.be)
     --postprocessor-args "-metadata artist='$ARTIST'" \
     -o "$MUSIC_PATH/$ARTIST/%(title)s.%(ext)s"
 
-  ls -A "$MUSIC_PATH/$ARTIST/**/*.wav"
-  [ $? -eq 0 ] \
-    && to_mp3 "$MUSIC_PATH/$ARTIST/**/*.wav"
-  [ $? -eq 0 ] \
-    && rm "$MUSIC_PATH/$ARTIST/**/*.wav"
+  ls -Ad $MUSIC_PATH/$ARTIST/**/*.wav
+    [ $? -eq 0 ] \
+      && to_mp3 $MUSIC_PATH/$ARTIST/**/*.wav
+        [ $? -eq 0 ] \
+          && rm $MUSIC_PATH/$ARTIST/**/*.wav
   ;;
 
 *.bandcamp.com)
@@ -163,9 +163,8 @@ youtube.com|youtu.be)
     done
   fi
 
-  RENAME_LIST=(` ls -RA $MUSIC_PATH/$ARTIST/NA/* `)
+  RENAME_LIST=(` ls -RAd $MUSIC_PATH/$ARTIST/NA/* `)
   if [ $? -eq 0 ]; then
-    echo "files in the album /NA/: '${RENAME_LIST[@]}'"
     for RENAME_FROM in "${RENAME_LIST[@]}"; do
       RENAME_TO=` echo "$RENAME_FROM" \
                 | sd '/NA/NA ' '/' \

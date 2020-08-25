@@ -38,21 +38,21 @@ fi
 
 
 
-to_mp3()
+wav_to_mp3()
 {
-  for NON_MP3 in "$@"
+  for WAV in "${1[@]}"
   do
-    OUT=` echo "$NON_MP3" \
-        |  sd '(\.\w+)?$' ' [conv].mp3' \
+    MP3=` echo "$WAV" \
+        | sd '\.wav$' ' [conv].mp3' \
         `
-    echo "'$NON_MP3'"
-    echo ">> '$OUT'"
+    echo "'$WAV'"
+    echo ">> '$MP3'"
 
-    ffmpeg -i "$NON_MP3" \
+    ffmpeg -i "$WAV" \
            -codec:a libmp3lame \
            -qscale:a 2 \
            -loglevel quiet \
-           -y "$OUT"
+           -y "$MP3"
   done
 }
 
@@ -126,11 +126,11 @@ youtube.com|youtu.be)
     --postprocessor-args "-metadata artist='$ARTIST'" \
     -o "$MUSIC_PATH/$ARTIST/%(title)s.%(ext)s"
 
-  ls -Ad $MUSIC_PATH/$ARTIST/**/*.wav
+  WAV_FILES=(` ls -RAd $MUSIC_PATH/$ARTIST/*.wav `)
     [ $? -eq 0 ] \
-      && to_mp3 $MUSIC_PATH/$ARTIST/**/*.wav
+      && wav_to_mp3 "$WAV_FILES"
         [ $? -eq 0 ] \
-          && rm $MUSIC_PATH/$ARTIST/**/*.wav
+          && rm "$WAV_FILES"
   ;;
 
 *.bandcamp.com)
@@ -169,11 +169,11 @@ youtube.com|youtu.be)
       RENAME_TO=` echo "$RENAME_FROM" \
                 | sd '/NA/NA ' '/' \
                 `
-    if [ "$RENAME_FROM" != "$RENAME_TO" ]; then
-      echo "'$RENAME_FROM'"
-      echo ">> '$RENAME_TO'"
-      mv "$RENAME_FROM" "$RENAME_TO"
-    fi
+      if [ "$RENAME_FROM" != "$RENAME_TO" ]; then
+        echo "'$RENAME_FROM'"
+        echo ">> '$RENAME_TO'"
+        mv "$RENAME_FROM" "$RENAME_TO"
+      fi
     done
     rmdir "$MUSIC_PATH/$ARTIST/NA/"
   fi

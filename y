@@ -40,7 +40,7 @@ fi
 
 wav_to_mp3()
 {
-  for WAV in "${1[@]}"
+  for WAV in "$@"
   do
     MP3=` echo "$WAV" \
         | sd '\.wav$' ' [conv].mp3' \

@@ -9,11 +9,7 @@
 # - `cargo install sd` – better `sed`
 # - `sudo apt install -y lynx` – to easily scrap web-pages
 
-
-DEFAULT_PATH='/Data/_'
-MUSIC_PATH='/Data/Music'
-AUDIOBOOKS_PATH='/Data/Audiobooks/yt'
-COMEDY_PATH='/Data/Audiobooks/comedy'
+. ./config.sh
 
 IFS=$'\n'
 

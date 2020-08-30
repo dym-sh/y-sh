@@ -1,14 +1,24 @@
-# y
+# y-sh
 
 > algorithmically-enhanced [youtube-dl](https://yt-dl.org) wrapper for audio-downloads
 
 
-## use
-`y <URL>`
+## [install](./install.sh) and use
+```sh
+PREFIX='/usr/local/'
 
-> `y https://orax.bandcamp.com/track/ectoplasmic`
+git clone \
+  https://github.com/dym-sh/y-sh/ \
+  $PREFIX/src/y-sh
 
-(edit to set your prefered save-files paths)
+cd $PREFIX/src/y-sh
+chmod +x ./y.sh
+ln -s ./y.sh $PREFIX/bin/y
+```
+
+`y https://orax.bandcamp.com/track/ectoplasmic`
+
+(edit the [config](./config.sh) file to set your prefered download paths)
 
 
 ## requires

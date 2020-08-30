@@ -8,7 +8,7 @@
 PREFIX='/usr/local/'
 
 git clone \
-  https://github.com/dym-sh/y-sh/ \
+  https://github.com/dym-sh/y-sh.git \
   $PREFIX/src/y-sh
 
 cd $PREFIX/src/y-sh
@@ -56,4 +56,4 @@ allows to set several predetermined filesystem-paths to keep file-categories sep
 - `hyper://3703079b5cbf386f5ef86eef4b9718d2fc31b5383ee258dc970276ee912f3664/` [[?](https://beakerbrowser.com)]
 
 ## license
-[MIT](./LICENSE)
+[mit](./LICENSE)

@@ -9,7 +9,9 @@
 # - `cargo install sd` – better `sed`
 # - `sudo apt install -y lynx` – to easily scrap web-pages
 
-. ./config.sh
+
+cd `realpath "$0" | xargs dirname`
+. config.sh
 
 IFS=$'\n'
 

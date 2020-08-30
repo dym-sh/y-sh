@@ -1,9 +1,7 @@
-#!/bin/bash
+export DEFAULT_PATH='/Data/_'
 
-DEFAULT_PATH='/Data/_'
+export MUSIC_PATH='/Data/Music'
 
-MUSIC_PATH='/Data/Music'
+export AUDIOBOOKS_PATH='/Data/Audiobooks/yt'
 
-AUDIOBOOKS_PATH='/Data/Audiobooks/yt'
-
-COMEDY_PATH='/Data/Audiobooks/comedy'
+export COMEDY_PATH='/Data/Audiobooks/comedy'

@@ -5,12 +5,13 @@
 ## use
 # bash ./install.sh
 
-PREFIX='/usr/local'
+PREFIX='/usr/local/'
 
-git clone \
-  https://github.com/dym-sh/y-sh/ \
+git clone --depth 1 \
+  https://github.com/dym-sh/y-sh.git \
   $PREFIX/src/y-sh/
 
-cd $PREFIX/src/y-sh/
-chmod +x ./y.sh
-ln -s ./y.sh $PREFIX/bin/y
+chmod +x $PREFIX/src/y-sh/y.sh
+
+ln -s $PREFIX/src/y-sh/y.sh \
+      $PREFIX/bin/y

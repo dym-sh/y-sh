@@ -4,16 +4,16 @@
 
 
 ## [install](./install.sh) and use
-```sh
+``` sh
 PREFIX='/usr/local/'
 
-git clone \
+git clone --depth 1 \
   https://github.com/dym-sh/y-sh.git \
-  $PREFIX/src/y-sh
+  $PREFIX/src/y-sh/
 
-cd $PREFIX/src/y-sh
-chmod +x ./y.sh
-ln -s ./y.sh $PREFIX/bin/y
+chmod +x $PREFIX/src/y-sh/y.sh
+ln -s $PREFIX/src/y-sh/y.sh \
+      $PREFIX/bin/y
 ```
 
 `y https://orax.bandcamp.com/track/ectoplasmic`
@@ -51,9 +51,10 @@ allows to set several predetermined filesystem-paths to keep file-categories sep
 
 
 ## mirrors
-- [github](https://gituhb.com/dym-sh/y-sh/)
+- [github](https://github.com/dym-sh/y-sh/)
 - [src.dym.sh](https://src.dym.sh/y-sh/)
 - `hyper://3703079b5cbf386f5ef86eef4b9718d2fc31b5383ee258dc970276ee912f3664/` [[?](https://beakerbrowser.com)]
+
 
 ## license
 [mit](./LICENSE)

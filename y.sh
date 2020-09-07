@@ -26,6 +26,10 @@ SITE=` echo "$URL" \
      | sd 'https?://(www\.)?' '' \
      | sd '/.*' '' \
      `
+if [ OPT == 'band' ]; then
+  SITE='_CNAME.bandcamp.com'
+fi
+
 echo "URL : '$URL'"
 echo "SITE : '$SITE'"
 
@@ -133,12 +137,26 @@ youtube.com|youtu.be)
 
 *.bandcamp.com)
   echo '> bandcamp'
-  ARTIST=` echo "$SITE" \
-         | sd '\.bandcamp\.com.*' '' \
-         `
-  if [ -z "$ARTIST" ]; then
-    ARTIST="$SITE"
+  ARTIST=''
+  if [ OPT == 'band' ]; then
+    ARTIST=` echo "$URL" \
+           | sd '^https?://(www\.)?' '' \
+           | sd '/.*$' '' \
+           | sd '\..+$' '' \
+           `
+     SITE=` echo "$URL" \
+          | sd '^https?://(www\.)?' '' \
+          | sd '/.*$' '' \
+          `
+  else
+    ARTIST=` echo "$SITE" \
+           | sd '\.bandcamp\.com.*' '' \
+           `
+    if [ -z "$ARTIST" ]; then
+      ARTIST="$SITE"
+    fi
   fi
+
   echo "ARTIST : '$ARTIST'"
 
   if [[ "$URL" =~ '/track/' ]]; then

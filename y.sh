@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## y-sh
+## y
 # > algorithmically-enhanced youtube-dl wrapper for audio-downloads
 
 ## requires

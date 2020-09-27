@@ -1,6 +1,6 @@
-# y-sh
+# y
 
-> algorithmically-enhanced [youtube-dl](https://yt-dl.org) wrapper for audio-downloads
+> algorithmically-enhanced [youtube-dl](https://yt-dl.org)[[c](https://github.com/blackjack4494/youtube-dlc)] wrapper for audio-downloads
 
 
 ## [install](./install.sh) and use
@@ -8,11 +8,11 @@
 PREFIX='/usr/local/'
 
 git clone --depth 1 \
-  https://github.com/dym-sh/y-sh.git \
-  $PREFIX/src/y-sh/
+  https://github.com/dym-sh/y.git \
+  $PREFIX/src/y/
 
-chmod +x $PREFIX/src/y-sh/y.sh
-ln -s $PREFIX/src/y-sh/y.sh \
+chmod +x $PREFIX/src/y/y.sh
+ln -s $PREFIX/src/y/y.sh \
       $PREFIX/bin/y
 ```
 
@@ -51,8 +51,8 @@ allows to set several predetermined filesystem-paths to keep file-categories sep
 
 
 ## mirrors
-- [github](https://github.com/dym-sh/y-sh/)
-- [src.dym.sh](https://src.dym.sh/y-sh/)
+- [github](https://github.com/dym-sh/y/)
+- [lab](https://dym.sh/lab/y/)
 - `hyper://3703079b5cbf386f5ef86eef4b9718d2fc31b5383ee258dc970276ee912f3664/` [[?](https://beakerbrowser.com)]
 
 

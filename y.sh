@@ -29,7 +29,7 @@ YDL()
   echo "no youtube-dl[c] found, install it with
     'python3 -m pip install --upgrade youtube-dlc'
     "
-  exit 0
+  exit 1
 }
 
 # load config

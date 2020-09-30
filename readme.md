@@ -54,6 +54,7 @@ allows to set several predetermined filesystem-paths to keep file-categories sep
 
 ## mirrors
 - [github](https://github.com/dym-sh/y/)
+- [gitlab](https://gitlab.com/dym-sh/y/)
 - [dym.sh](https://dym.sh/lab/y/)
 - `hyper://3703079b5cbf386f5ef86eef4b9718d2fc31b5383ee258dc970276ee912f3664/` [[?](https://beakerbrowser.com)]
 

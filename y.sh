@@ -1,26 +1,52 @@
 #!/bin/bash
 
 ## y
-# > algorithmically-enhanced youtube-dl wrapper for audio-downloads
+# > algorithmically-enhanced youtube-dl[c] wrapper for audio-downloads
 
 ## requires
-# - `pip install youtube_dl` – the main thing, you should already have it
+# - `pip install youtube_dl`
+#   or `python3 -m pip install --upgrade youtube-dlc`
+#   – the main thing, you should already have it
 # - `sudo apt install -y ffmpeg` – to convert files of diffrent formats
 # - `cargo install sd` – better `sed`
 # - `sudo apt install -y lynx` – to easily scrap web-pages
 
 
+YDL()
+{
+  which youtube-dlc
+  if [ $? -eq 0 ]; then
+    youtube-dlc --force-ipv4 $@
+    return
+  fi
+
+  which youtube-dl
+  if [ $? -eq 0 ]; then
+    youtube-dl --force-ipv4 $@
+    return
+  fi
+
+  echo "no youtube-dl[c] found, install it with
+    'python3 -m pip install --upgrade youtube-dlc'
+    "
+  exit 0
+}
+
+# load config
 cd `realpath "$0" | xargs dirname`
 . config.sh
 
+# use new-line as separator of array elements
 IFS=$'\n'
 
+# parse cli options
 OPT="$1"
 URL="$2"
 if [ -z "$URL" ]; then
   OPT=''
   URL="$1"
 fi
+
 
 SITE=` echo "$URL" \
      | sd 'https?://(www\.)?' '' \
@@ -34,8 +60,8 @@ echo "URL : '$URL'"
 echo "SITE : '$SITE'"
 
 if [ "$OPT" == 'F' ]; then
-  youtube-dl "$URL" -F
-  exit 0
+  YDL "$URL" -F
+  exit 1
 fi
 
 
@@ -61,10 +87,10 @@ wav_to_mp3()
 get_bandcamp_track()
 {
   echo "> > track: '$1'"
-  youtube-dl "$1" --force-ipv4 -f mp3-320 \
+  YDL "$1" -f mp3-320 \
     -o "$MUSIC_PATH/$ARTIST/%(album)s/%(track_number)02d %(title)s.%(ext)s"
   [ $? -eq 1 ] \
-    && youtube-dl "$1" --force-ipv4 -f mp3 \
+    && YDL "$1" -f mp3 \
        -o "$MUSIC_PATH/$ARTIST/%(album)s/%(track_number)02d %(title)s.%(ext)s"
 }
 
@@ -87,7 +113,7 @@ case "$SITE" in
 
 'music.youtube.com')
   echo '> youtube-music'
-  youtube-dl "$URL" --force-ipv4 -f 251 \
+  YDL "$URL" -f 251 \
     -o "$MUSIC_PATH/%(artist)s - %(title)s.%(ext)s"
   ;;
 
@@ -96,22 +122,22 @@ youtube.com|youtu.be)
   case "$OPT" in
   'm')
     echo '> > music'
-    youtube-dl "$URL" --force-ipv4 -f 251 \
+    YDL "$URL" -f 251 \
       -o "$MUSIC_PATH/%(title)s.%(ext)s"
     ;;
   'a')
     echo '> > audiobook'
-    youtube-dl "$URL" --force-ipv4 -f 251 \
+    YDL "$URL" -f 251 \
       -o "$AUDIOBOOKS_PATH/%(title)s.%(ext)s"
     ;;
   'c')
     echo '> > comedy'
-    youtube-dl "$URL" --force-ipv4 -f 251 \
+    YDL "$URL" -f 251 \
       -o "$COMEDY_PATH/%(title)s.%(ext)s"
     ;;
   *)
     echo '> > _video_'
-    youtube-dl "$URL" --force-ipv4 \
+    YDL "$URL" \
       -o "$DEFAULT_PATH/%(title)s.%(ext)s"
     ;;
   esac
@@ -124,15 +150,15 @@ youtube.com|youtu.be)
          | sd '/.*' '' \
          `
   echo "ARTIST : '$ARTIST'"
-  youtube-dl "$URL" --force-ipv4 --add-metadata \
+  YDL "$URL" --add-metadata \
     --postprocessor-args "-metadata artist='$ARTIST'" \
     -o "$MUSIC_PATH/$ARTIST/%(title)s.%(ext)s"
 
   WAV_FILES=(` ls -RAd $MUSIC_PATH/$ARTIST/*.wav `)
-    [ $? -eq 0 ] \
-      && wav_to_mp3 "$WAV_FILES"
-        [ $? -eq 0 ] \
-          && rm "$WAV_FILES"
+  [ $? -eq 0 ] \
+    && wav_to_mp3 "$WAV_FILES"
+  [ $? -eq 0 ] \
+    && rm "$WAV_FILES"
   ;;
 
 *.bandcamp.com)
@@ -204,14 +230,12 @@ youtube.com|youtu.be)
             | sd '/?\?.*' '' \
             `
   echo "CLEAN_URL : '$CLEAN_URL'"
-  youtube-dl "$URL" --force-ipv4 \
-    -o "$DEFAULT_PATH/$CLEAN_URL.%(ext)s"
+  YDL "$URL" -o "$DEFAULT_PATH/$CLEAN_URL.%(ext)s"
   ;;
 
 *)
   echo '> _default_'
-  youtube-dl "$URL" --force-ipv4 \
-    -o "$DEFAULT_PATH/%(title)s.%(ext)s"
+  YDL "$URL" -o "$DEFAULT_PATH/%(title)s.%(ext)s"
   ;;
 
 esac

@@ -22,9 +22,11 @@ ln -s $PREFIX/src/y/y.sh \
 
 
 ## requires
-- `pip install youtube_dl` – the main thing, you should already have it
+- `pip install youtube_dl` \
+  or `python3 -m pip install --upgrade youtube-dlc` \
+  – the main thing
 - `sudo apt install -y ffmpeg` – to convert files of diffrent formats
-- `cargo install sd` – better `sed`
+- `cargo install sd` – a better `sed`
 - `sudo apt install -y lynx` – to easily scrap web-pages
 
 
@@ -52,7 +54,7 @@ allows to set several predetermined filesystem-paths to keep file-categories sep
 
 ## mirrors
 - [github](https://github.com/dym-sh/y/)
-- [lab](https://dym.sh/lab/y/)
+- [dym.sh](https://dym.sh/lab/y/)
 - `hyper://3703079b5cbf386f5ef86eef4b9718d2fc31b5383ee258dc970276ee912f3664/` [[?](https://beakerbrowser.com)]
 
 

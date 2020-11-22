@@ -1,11 +1,11 @@
 # y
 
-> algorithmically-enhanced [youtube-dl](https://yt-dl.org)[[c](https://github.com/blackjack4494/youtube-dlc)] wrapper for audio-downloads
+> algorithmically-enhanced [youtube-dl](https://yt-dl.org)[[c](https://github.com/blackjack4494/yt-dlc)] wrapper for audio-downloads
 
 
 ## [install](./install.sh) and use
 ``` sh
-PREFIX='/usr/local/'
+PREFIX='~/.local'
 
 git clone --depth 1 \
   https://github.com/dym-sh/y.git \
@@ -18,7 +18,7 @@ ln -s $PREFIX/src/y/y.sh \
 
 `y https://orax.bandcamp.com/track/ectoplasmic`
 
-(edit the [config](./config.sh) file to set your prefered download paths)
+(adjust [config](./config.sh) file to set your prefered download paths)
 
 
 ## requires
@@ -53,11 +53,11 @@ allows to set several predetermined filesystem-paths to keep file-categories sep
 
 
 ## mirrors
-- [github](https://github.com/dym-sh/y/)
-- [gitlab](https://gitlab.com/dym-sh/y/)
-- [dym.sh](https://dym.sh/lab/y/)
-- `hyper://3703079b5cbf386f5ef86eef4b9718d2fc31b5383ee258dc970276ee912f3664/` [[?](https://beakerbrowser.com)]
+- https://github.com/dym-sh/y
+- https://gitlab.com/dym-sh/y
+- https://dym.sh/y
+- hyper://6b07085d3721e2f271ccd636384ec09ac8a9159d56ebc38ae4704b41e064b884 /[?](https://beakerbrowser.com)
 
 
 ## license
-[mit](./LICENSE)
+[mit](./license)

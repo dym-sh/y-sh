@@ -5,7 +5,7 @@
 ## use
 # bash ./install.sh
 
-PREFIX='/usr/local/'
+PREFIX='~/.local'
 
 git clone --depth 1 \
   https://github.com/dym-sh/y.git \

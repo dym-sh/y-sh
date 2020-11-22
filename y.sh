@@ -66,21 +66,23 @@ fi
 
 
 
-wav_to_mp3()
+to_mp3()
 {
-  for WAV in "$@"
-  do
-    MP3=` echo "$WAV" \
-        | sd '\.wav$' ' [conv].mp3' \
+  echo "to mp3: ${[@]}"
+  for UNCOMPRESSED in "${[@]}" ; do
+    MP3=` echo "$UNCOMPRESSED" \
+        | sd '\.\w+$' ' [conv].mp3' \
         `
-    echo "'$WAV'"
+    echo "'$UNCOMPRESSED'"
     echo ">> '$MP3'"
 
-    ffmpeg -i "$WAV" \
+    ffmpeg -i "$UNCOMPRESSED" \
            -codec:a libmp3lame \
            -qscale:a 2 \
            -loglevel quiet \
            -y "$MP3"
+
+    rm "$UNCOMPRESSED"
   done
 }
 
@@ -156,9 +158,11 @@ youtube.com|youtu.be)
 
   WAV_FILES=(` ls -RAd $MUSIC_PATH/$ARTIST/*.wav `)
   [ $? -eq 0 ] \
-    && wav_to_mp3 "$WAV_FILES"
+    && to_mp3 "$WAV_FILES"
+
+  FLAC_FILES=(` ls -RAd $MUSIC_PATH/$ARTIST/*.flac `)
   [ $? -eq 0 ] \
-    && rm "$WAV_FILES"
+    && to_mp3 "$FLAC_FILES"
   ;;
 
 *.bandcamp.com)

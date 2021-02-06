@@ -68,8 +68,9 @@ fi
 
 to_mp3()
 {
-  echo "to mp3: ${[@]}"
-  for UNCOMPRESSED in "${[@]}" ; do
+  echo "to mp3: [ ${@} ]"
+
+  for UNCOMPRESSED in "${@}" ; do
     MP3=` echo "$UNCOMPRESSED" \
         | sd '\.\w+$' ' [conv].mp3' \
         `
@@ -144,6 +145,7 @@ youtube.com|youtu.be)
     ;;
   esac
   ;;
+
 
 'soundcloud.com')
   echo '> soundcloud'
@@ -226,16 +228,31 @@ youtube.com|youtu.be)
 
   ;;
 
+
 'twitter.com')
   echo '> twitter'
   CLEAN_URL=` echo "$URL" \
-            | sd 'https?://(www.)?twitter.com/' '' \
+            | sd '^https?://(www.)?twitter.com/' '' \
+            | sd '/?\?.*$' '' \
             | sd -- '/status/' '--' \
-            | sd '/?\?.*' '' \
             `
   echo "CLEAN_URL : '$CLEAN_URL'"
   YDL "$URL" -o "$DEFAULT_PATH/$CLEAN_URL.%(ext)s"
   ;;
+
+
+'reddit.com')
+  echo '> reddit'
+  CLEAN_URL=` echo "$URL" \
+            | sd '^https?://(\w+.)?reddit.com/(r/)?' '' \
+            | sd '/?\?.*$' '' \
+            | sd -- '/?comments/' '--' \
+            | sd -- '/' '-' \
+            `
+  echo "CLEAN_URL : '$CLEAN_URL'"
+  YDL "$URL" -o "$DEFAULT_PATH/$CLEAN_URL.%(ext)s"
+  ;;
+
 
 *)
   echo '> _default_'

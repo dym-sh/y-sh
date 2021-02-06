@@ -1,7 +1,7 @@
 export DEFAULT_PATH='/Data/_'
 
-export MUSIC_PATH='/Data/Music'
+export MUSIC_PATH='/Data/music'
 
-export AUDIOBOOKS_PATH='/Data/Audiobooks/yt'
+export AUDIOBOOKS_PATH='/Data/ab/yt'
 
-export COMEDY_PATH='/Data/Audiobooks/comedy'
+export COMEDY_PATH='/Data/ab/comedy'

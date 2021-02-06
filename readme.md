@@ -37,8 +37,12 @@ ln -s $PREFIX/src/y/y.sh \
 2. downloads entire discography if given root-domain or `/music` url
 
 ### twitter
-file-names are just twitter-username and tweet-number
+file-name is now twitter-username and tweet-id
 (instead of full text of a tweet, which can result in strings over 255 characters long, aborting the entire process)
+
+### reddit
+file-name is now subreddit, post-id, and url-slug
+(instead of full text of a title, which can result in strings over 255 characters long, aborting the entire process)
 
 ### youtube
 allows to set several predetermined filesystem-paths to keep file-categories separately:
@@ -52,11 +56,16 @@ allows to set several predetermined filesystem-paths to keep file-categories sep
 2. artist is set based on url (instead of having none by default)
 
 
+## tags
+- #script
+- #bash
+
+
 ## mirrors
 - https://github.com/dym-sh/y
 - https://gitlab.com/dym-sh/y
 - https://dym.sh/y
-- hyper://6b07085d3721e2f271ccd636384ec09ac8a9159d56ebc38ae4704b41e064b884 /[?](https://beakerbrowser.com)
+- hyper://___ /[?](https://beakerbrowser.com)
 
 
 ## license

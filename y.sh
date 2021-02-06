@@ -67,9 +67,9 @@ fi
 
 to_mp3()
 {
-  echo "to mp3: [ $@ ]"
+  echo "to mp3: [ ${@} ]"
 
-  for UNCOMPRESSED in "$@" ; do
+  for UNCOMPRESSED in "${@}" ; do
     MP3=` echo "$UNCOMPRESSED" \
         | sd '\.\w+$' ' [conv].mp3' \
         `
@@ -245,8 +245,7 @@ youtube.com|youtu.be)
   CLEAN_URL=` echo "$URL" \
             | sd '^https?://(\w+.)?reddit.com/(r/)?' '' \
             | sd '/?\?.*$' '' \
-            | sd '/$' '' \
-            | sd -- '/?comments/' '-' \
+            | sd -- '/?comments/' '--' \
             | sd -- '/' '-' \
             `
   echo "CLEAN_URL : '$CLEAN_URL'"

@@ -5,7 +5,7 @@
 
 ## requires
 # - `pip install youtube_dl`
-#   or `python3 -m pip install --upgrade youtube-dlc`
+#   or `python3 -m pip install --upgrade youtube-dl`
 #   – the main thing, you should already have it
 # - `sudo apt install -y ffmpeg` – to convert files of diffrent formats
 # - `cargo install sd` – better `sed`
@@ -14,21 +14,20 @@
 
 YDL()
 {
-  which youtube-dlc
-  if [ $? -eq 0 ]; then
-    youtube-dlc --force-ipv4 $@
-    return
-  fi
-
   which youtube-dl
   if [ $? -eq 0 ]; then
-    youtube-dl --force-ipv4 $@
+    youtube-dl  --force-ipv4  $@   # --verbose
     return
   fi
 
-  echo "no youtube-dl[c] found, install it with
-    'python3 -m pip install --upgrade youtube-dlc'
-    "
+  echo 'no youtube-dl found, you can install it with:
+
+        sudo apt install \
+          python3 python3-pip
+
+        python3 -m pip install --upgrade \
+          youtube-dl
+       '
   exit 1
 }
 
@@ -68,9 +67,9 @@ fi
 
 to_mp3()
 {
-  echo "to mp3: [ ${@} ]"
+  echo "to mp3: [ $@ ]"
 
-  for UNCOMPRESSED in "${@}" ; do
+  for UNCOMPRESSED in "$@" ; do
     MP3=` echo "$UNCOMPRESSED" \
         | sd '\.\w+$' ' [conv].mp3' \
         `
@@ -246,7 +245,8 @@ youtube.com|youtu.be)
   CLEAN_URL=` echo "$URL" \
             | sd '^https?://(\w+.)?reddit.com/(r/)?' '' \
             | sd '/?\?.*$' '' \
-            | sd -- '/?comments/' '--' \
+            | sd '/$' '' \
+            | sd -- '/?comments/' '-' \
             | sd -- '/' '-' \
             `
   echo "CLEAN_URL : '$CLEAN_URL'"

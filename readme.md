@@ -1,33 +1,24 @@
 # y
 
-> algorithmically-enhanced [youtube-dl](https://yt-dl.org)[[c](https://github.com/blackjack4494/yt-dlc)] wrapper for audio-downloads
+> algorithmically-enhanced [youtube-dl](https://yt-dl.org) wrapper for audio-downloads
 
 
-## [install](./install.sh) and use
-``` sh
-PREFIX='~/.local'
+## install
+1. look at [`install.sh`](./install.sh) file for instructions
+2. adjust `PREFIX` at wish
+3. make sure the final directory is on `$PATH`
 
-git clone --depth 1 \
-  https://dym.sh/y/ \
-  $PREFIX/src/y/
-
-chmod +x $PREFIX/src/y/y.sh
-ln -s $PREFIX/src/y/y.sh \
-      $PREFIX/bin/y
-```
-
+## use
 `y https://orax.bandcamp.com/track/ectoplasmic`
 
-(adjust [config](./config.sh) file to set your prefered download paths)
+(adjust [config.sh](./config.sh) file to set your prefered download paths)
 
 
-## requires
-- `pip install youtube_dl` \
-  or `python3 -m pip install --upgrade youtube-dlc` \
-  – the main thing
-- `sudo apt install -y ffmpeg` – to convert files of diffrent formats
-- `cargo install sd` – a better `sed`
-- `sudo apt install -y lynx` – to easily scrap web-pages
+## requirments
+- [`youtube_dl`](https://github.com/ytdl-org/youtube-dl) – the main thing
+- [`ffmpeg`](https://ffmpeg.org/download.html) – to convert files of diffrent formats
+- [`sd`](https://github.com/chmln/sd) – a better `sed`
+- [`lynx`](https://github.com/lynx/lynx) – to easily scrap web-pages
 
 
 ## site-specific improvements
@@ -54,18 +45,3 @@ allows to set several predetermined filesystem-paths to keep file-categories sep
 ### soundcloud
 1. occasional wav-files are converted to mp3 320kb/s
 2. artist is set based on url (instead of having none by default)
-
-
-## tags
-- #script
-- #bash
-
-
-## mirrors
-- https://github.com/dym-sh/y
-- https://gitlab.com/dym-sh/y
-- https://dym.sh/y
-
-
-## license
-[mit](./license)

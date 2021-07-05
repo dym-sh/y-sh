@@ -1,0 +1,14 @@
+title = 'y'
+description = 'algorithmically-enhanced youtube-dl wrapper for audio-downloads'
+type = 'code'
+tags = [ 'bash-script', 'file-download' ]
+license = 'MIT'
+homepage = 'https://dym.sh/y'
+source = 'https://source.garden/y'
+
+[mirrors]
+github = 'https://github.com/dym-sh/y'
+gitlab = 'https://gitlab.com/dym-sh/y'
+
+[log]
+created = 2020-10-12

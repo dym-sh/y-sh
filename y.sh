@@ -4,11 +4,10 @@
 # > algorithmically-enhanced youtube-dl[c] wrapper for audio-downloads
 
 ## requires
-# - `pip install youtube_dl`
-#   or `python3 -m pip install --upgrade youtube-dl`
+# - `python3 -m pip install --upgrade youtube-dl`
 #   – the main thing, you should already have it
 # - `sudo apt install -y ffmpeg` – to convert files of diffrent formats
-# - `cargo install sd` – better `sed`
+# - `cargo install sd` – a better `sed`
 # - `sudo apt install -y lynx` – to easily scrap web-pages
 
 
@@ -16,13 +15,15 @@ YDL()
 {
   which youtube-dl
   if [ $? -eq 0 ]; then
-    youtube-dl  --force-ipv4  $@   # --verbose
+    youtube-dl --force-ipv4  $@
+      # --verbose
+      # --restrict-filenames
     return
   fi
 
   echo 'no youtube-dl found, you can install it with:
 
-        sudo apt install \
+        sudo apt install -y \
           python3 python3-pip
 
         python3 -m pip install --upgrade \
